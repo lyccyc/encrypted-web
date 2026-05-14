@@ -32,7 +32,7 @@ app.secret_key = os.getenv("FLASK_SECRET_KEY", "demo-only-secret-key")
 IS_VERCEL = os.getenv("VERCEL") == "1"
 PUBLIC_DEMO_MODE = os.getenv(
     "PUBLIC_DEMO_MODE",
-    "true" if IS_VERCEL else "false"
+    "false"
 ).lower() == "true"
 
 app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024
@@ -233,7 +233,7 @@ def demo_decrypt():
 
 @app.route("/encrypt", methods=["POST"])
 def encrypt():
-    if PUBLIC_DEMO_MODE:
+    if PUBLIC_DEMO_MODE and IS_VERCEL:
         flash("Public demo mode only processes bundled demo files. Visitor uploads are disabled.")
         return redirect(url_for("workspace"))
 
@@ -271,7 +271,7 @@ def encrypt():
 
 @app.route("/decrypt", methods=["POST"])
 def decrypt():
-    if PUBLIC_DEMO_MODE:
+    if PUBLIC_DEMO_MODE and IS_VERCEL:
         flash("Public demo mode only processes bundled demo files. Visitor uploads are disabled.")
         return redirect(url_for("workspace"))
 

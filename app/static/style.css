@@ -595,6 +595,10 @@ form {
     gap: 15px;
 }
 
+.operation-panel form + form {
+    margin-top: 16px;
+}
+
 label {
     color: var(--clay-foreground);
     font-size: 0.94rem;
@@ -641,6 +645,13 @@ select:focus {
 .btn-decrypt {
     margin-top: 6px;
     background: linear-gradient(135deg, #34d399, var(--clay-green));
+}
+
+.btn-secondary {
+    min-height: 48px;
+    color: var(--clay-foreground);
+    background: var(--clay-surface-strong);
+    box-shadow: var(--shadow-card);
 }
 
 #loadingOverlay {

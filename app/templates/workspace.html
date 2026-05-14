@@ -42,12 +42,12 @@
                     <span class="eyebrow">Workspace</span>
                     <h1>Run ID encryption or decryption from one clean control page.</h1>
                     <p class="hero-text">
-                        Public demo mode uses bundled sample data only, so visitors never upload real ID spreadsheets.
+                        Upload a CSV or Excel file, choose the operation, and download the processed spreadsheet output.
                     </p>
                 </div>
                 <div class="workspace-note">
-                    <span class="summary-label">Demo mode</span>
-                    <p>Bundled sample data</p>
+                    <span class="summary-label">Accepted files</span>
+                    <p>CSV, XLSX, XLS</p>
                     <span class="summary-label">Algorithms</span>
                     <p>FF1, FF3-1</p>
                 </div>
@@ -72,17 +72,25 @@
                         </div>
                     </div>
                     <p class="section-copy">
-                        Choose an encryption algorithm and download encrypted output generated from bundled sample data.
+                        Upload an ID spreadsheet, choose an encryption algorithm, and download the encrypted result bundle.
                     </p>
 
-                    <form action="{{ url_for('demo_encrypt') }}" method="post" onsubmit="showLoading('Encrypting sample data and generating Excel files...')">
+                    <form action="{{ url_for('encrypt') }}" method="post" enctype="multipart/form-data" onsubmit="showLoading('Encrypting uploaded file and generating Excel files...')">
+                        <label for="encrypt-file">Input file</label>
+                        <input type="file" name="file" id="encrypt-file" accept=".csv,.xlsx,.xls" required>
+
                         <label for="algorithm">Encryption algorithm</label>
                         <select name="algorithm" id="algorithm">
                             <option value="FF1">FF1</option>
                             <option value="FF3-1">FF3-1</option>
                         </select>
 
-                        <button type="submit" class="btn-encrypt">Run Demo Encryption</button>
+                        <button type="submit" class="btn-encrypt">Encrypt File</button>
+                    </form>
+
+                    <form action="{{ url_for('demo_encrypt') }}" method="post" onsubmit="showLoading('Encrypting sample data and generating Excel files...')">
+                        <input type="hidden" name="algorithm" value="FF1">
+                        <button type="submit" class="btn-secondary">Try Sample Encryption</button>
                     </form>
                 </div>
 
@@ -94,11 +102,18 @@
                         </div>
                     </div>
                     <p class="section-copy">
-                        Generate a demo process file behind the scenes and download the restored sample ID numbers.
+                        Upload a metadata/result spreadsheet from the encryption flow and download restored ID numbers.
                     </p>
 
-                    <form action="{{ url_for('demo_decrypt') }}" method="post" onsubmit="showLoading('Decrypting demo data and restoring ID numbers...')">
-                        <button type="submit" class="btn-decrypt">Run Demo Decryption</button>
+                    <form action="{{ url_for('decrypt') }}" method="post" enctype="multipart/form-data" onsubmit="showLoading('Decrypting uploaded file and restoring ID numbers...')">
+                        <label for="decrypt-file">Input file</label>
+                        <input type="file" name="file" id="decrypt-file" accept=".csv,.xlsx,.xls" required>
+
+                        <button type="submit" class="btn-decrypt">Decrypt File</button>
+                    </form>
+
+                    <form action="{{ url_for('demo_decrypt') }}" method="post" onsubmit="showLoading('Decrypting sample data and restoring ID numbers...')">
+                        <button type="submit" class="btn-secondary">Try Sample Decryption</button>
                     </form>
                 </div>
             </section>

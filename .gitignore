@@ -1,0 +1,14 @@
+./vscode
+__pycache__/
+*.pyc
+.env
+ff1.py
+ff3.py
+.vercel/
+.pytest_cache/
+.mypy_cache/
+.tmp/
+*.log
+app/uploads/
+app/output/
+.vercel

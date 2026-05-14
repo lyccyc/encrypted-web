@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultCipher | Personal ID Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="home-body">
+    <div class="ambient-blobs" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="page-shell">
+        <main class="site-frame">
+            <header class="site-header">
+                <a class="brand-block" href="{{ url_for('index') }}">
+                    <span class="brand-mark">VC</span>
+                    <div>
+                        <p class="brand-name">VaultCipher</p>
+                        <p class="brand-subtitle">Personal ID encrypt and decrypt workspace</p>
+                    </div>
+                </a>
+                <nav class="top-nav">
+                    <a href="{{ url_for('workspace') }}">Workspace</a>
+                </nav>
+            </header>
+
+            <section class="hero-simple">
+                <div class="hero-copy">
+                    <span class="eyebrow">Private ID workflow</span>
+                    <h1>Encrypt and decrypt ID numbers in a private workspace.</h1>
+                    <p class="hero-text">
+                        VaultCipher is a public demo for exploring format-preserving encryption on bundled sample ID data only.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="cta-primary" href="{{ url_for('workspace') }}">Open Workspace</a>
+                        <a class="cta-secondary" href="#workflow">View Workflow</a>
+                        <p class="hero-note">Public demo mode uses bundled sample files only.</p>
+                    </div>
+                </div>
+
+                <div class="hero-summary">
+                    <div class="summary-card">
+                        <span class="summary-label">What it does</span>
+                        <p>Encrypts and restores sample ID numbers without accepting visitor files.</p>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Why it helps</span>
+                        <p>Shows how the spreadsheet workflow behaves with format-preserving encryption.</p>
+                    </div>
+                    <div class="summary-card">
+                        <span class="summary-label">Best for</span>
+                        <p>Deployment previews, demonstrations, and safe walkthroughs.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="feature-grid" id="workflow" aria-label="VaultCipher workflow highlights">
+                <article class="feature-card">
+                    <h2>Clear workflow</h2>
+                    <p>Run a sample encryption flow and download the generated demo output.</p>
+                </article>
+                <article class="feature-card">
+                    <h2>Useful outputs</h2>
+                    <p>Encryption returns result files, and decryption restores the bundled sample data into spreadsheet format.</p>
+                </article>
+                <article class="feature-card">
+                    <h2>Focused workspace</h2>
+                    <p>The action page is separated from the homepage so you can move straight into the tool when needed.</p>
+                </article>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

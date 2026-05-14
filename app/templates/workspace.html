@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VaultCipher | ID Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="workspace-body">
+    <div class="ambient-blobs" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <div id="loadingText">Processing, please wait...</div>
+    </div>
+
+    <div class="page-shell">
+        <main class="site-frame">
+            <header class="site-header">
+                <a class="brand-block" href="{{ url_for('index') }}">
+                    <span class="brand-mark">VC</span>
+                    <div>
+                        <p class="brand-name">VaultCipher</p>
+                        <p class="brand-subtitle">Personal ID encrypt and decrypt workspace</p>
+                    </div>
+                </a>
+                <nav class="top-nav">
+                    <a href="{{ url_for('index') }}">Home</a>
+                    <a class="nav-active" href="{{ url_for('workspace') }}">Workspace</a>
+                </nav>
+            </header>
+
+            <section class="workspace-hero">
+                <div>
+                    <span class="eyebrow">Workspace</span>
+                    <h1>Run ID encryption or decryption from one clean control page.</h1>
+                    <p class="hero-text">
+                        Public demo mode uses bundled sample data only, so visitors never upload real ID spreadsheets.
+                    </p>
+                </div>
+                <div class="workspace-note">
+                    <span class="summary-label">Demo mode</span>
+                    <p>Bundled sample data</p>
+                    <span class="summary-label">Algorithms</span>
+                    <p>FF1, FF3-1</p>
+                </div>
+            </section>
+
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="flash-messages">
+                  {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            <section class="panel-grid">
+                <div class="section operation-panel">
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-tag encrypt-tag">Encrypt</span>
+                            <h2>Encrypt ID numbers</h2>
+                        </div>
+                    </div>
+                    <p class="section-copy">
+                        Choose an encryption algorithm and download encrypted output generated from bundled sample data.
+                    </p>
+
+                    <form action="{{ url_for('demo_encrypt') }}" method="post" onsubmit="showLoading('Encrypting sample data and generating Excel files...')">
+                        <label for="algorithm">Encryption algorithm</label>
+                        <select name="algorithm" id="algorithm">
+                            <option value="FF1">FF1</option>
+                            <option value="FF3-1">FF3-1</option>
+                        </select>
+
+                        <button type="submit" class="btn-encrypt">Run Demo Encryption</button>
+                    </form>
+                </div>
+
+                <div class="section operation-panel">
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-tag decrypt-tag">Decrypt</span>
+                            <h2>Decrypt ID numbers</h2>
+                        </div>
+                    </div>
+                    <p class="section-copy">
+                        Generate a demo process file behind the scenes and download the restored sample ID numbers.
+                    </p>
+
+                    <form action="{{ url_for('demo_decrypt') }}" method="post" onsubmit="showLoading('Decrypting demo data and restoring ID numbers...')">
+                        <button type="submit" class="btn-decrypt">Run Demo Decryption</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function showLoading(text) {
+            document.getElementById('loadingText').innerText = text;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
